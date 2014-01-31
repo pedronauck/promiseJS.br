@@ -22,3 +22,23 @@ Promises tem por objetivo resolver o problema 1 e 3 e pode resolver o problema 4
 
 ## Uso Básico
 
+A ideia central por trás das promises (promessas) é que uma promise representa um valor que é o resultado de uma operação assíncrona. Elas podem como alternativa vir a ser um erro lançado. Funções assíncronas podem retornar promises:
+
+<pre>
+<code class="language-javascript">
+var prom = get('http://www.example.com');
+</code>
+</pre>
+
+Se nós requisitarmos o conteúdo da página <code>www.example.com</code> nós vamos estar fazendo isso assíncronamente então podemos receber uma promise de volta.
+
+No intuito de extrair o valor desta promise, nós usamos <code>.done</code> que enfilera uma função a ser executada quando a promise é preenchida com algum resultado.
+
+<pre>
+<code class="language-javascript">
+var prom = get('http://www.example.com');
+prom.done(function ( content ) {
+	console.log( content );
+})
+</code>
+</pre> 
