@@ -32,7 +32,7 @@ var prom = get('http://www.example.com');
 
 Se nós requisitarmos o conteúdo da página <code>www.example.com</code> nós vamos estar fazendo isso assíncronamente então podemos receber uma promise de volta.
 
-No intuito de extrair o valor desta promise, nós usamos <code>.done</code> que enfilera uma função a ser executada quando a promise é preenchida com algum resultado.
+No intuito de extrair o valor desta promise, nós usamos <code class="language-javascript">.done</code> que enfilera uma função a ser executada quando a promise é preenchida com algum resultado.
 
 <pre>
 <code class="language-javascript">
@@ -41,4 +41,66 @@ prom.done(function ( content ) {
 	console.log( content );
 })
 </code>
-</pre> 
+</pre>
+
+Note como nós passamos uma função que ainda não foi chamada para <code class="language-javascript">.done</code> e isso vai ser chamado apenas uma vez, quando o promise estiver preenchido. Nós podemos chamar <code class="language-javascript">.done</code> quantas vezes quisermos, antes ou depois, como quisermos, e sempre iremos obter o mesmo resultado. Por exemplo, não há problema em chamá-lo depois que a promise já estiver resolvida:
+
+<pre>
+<code class="language-javascript">
+var cache = {};
+
+function getCache ( url ) {
+	if ( cache[url] ) return cache[ url ];
+	else return cache[ url ] = get( url );
+}
+
+var promA = getCache( 'http://www.example.com' );
+
+promA.done(function ( content ) {
+	console.log( content );
+});
+
+setTimeout(function () {
+	var promB = getCache( 'http://www.example.com' );
+	promB.done(function ( content ) {
+		console.log( content );
+	});
+}, 10000);
+
+</code>
+</pre>
+
+Claro, requisitar uma página de erro vai facilmente dar errado, e lançar um erro. Por padrão, <code class="language-javascript">.done</code> somente lança este erro, então isto fica registrado apropriadamente e (em ambientes diferentes do browser) quebra a aplicação. Nós frequentemente queremos atribuir nosso próprio manipulador:
+
+<pre>
+<code class="language-javascript">
+var prom = get( 'http://www.example.com' );
+prom.done(function ( content ) {
+	console.log( content );
+}, function ( ex ) {
+	console.error( 'Requisição www.example.com falhou, você deveria tentar novamente?' );
+	console.error( ex.stack );
+});
+</code>
+</pre>
+
+## Transformação
+
+Sempre que você tiver uma promise para uma coisa e você precisa fazer algum trabalho nela para obter uma promise para outra coisa. Promises tem um método <code class="language-javascript">.then</code> que trabalha um pouco parecido com um <code class="language-javascript">.map</code> em um array.
+
+<pre>
+<code class="language-javascript">
+function getJSON ( url ) {
+	return get ( url )
+		.then(function ( res ) {
+			return JSON.parse( res );
+		});
+}
+
+getJSON( 'htttp://www.example.com/foo.json' ).done(function ( res ) {
+	console.log( res );
+});
+</code>
+</pre>
+
+Note como <code class="language-javascript">.then</code> manuseia qualquer erro para nós, então eles "sobem" nas pilhas como no código síncrono. VOcê pode também manipulá-los quando você chama <code class="language-javascript">.then</code>
