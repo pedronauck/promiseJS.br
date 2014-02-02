@@ -20,7 +20,8 @@ page "robots.txt", :layout => false
 # activate :automatic_image_sizes
 
 activate :livereload
-activate :directory_indexes
+activate :relative_assets
+set :relative_links, true
 
 ignore 'docs*'
 ignore 'images/symbol.ai'
@@ -37,5 +38,4 @@ end
 configure :build do
   activate :minify_css
   activate :minify_javascript
-  activate :relative_assets
 end
