@@ -1,3 +1,2 @@
-//= require vendor/jquery/jquery
-//= require vendor/prism
+//= require prism
 //= require_self

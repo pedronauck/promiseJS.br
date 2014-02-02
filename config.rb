@@ -22,6 +22,9 @@ page "robots.txt", :layout => false
 activate :livereload
 activate :directory_indexes
 
+ignore 'docs*'
+ignore 'images/symbol.ai'
+
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
