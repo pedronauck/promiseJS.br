@@ -1,0 +1,52 @@
+// ================================================================================================
+//
+//  Variables
+//
+//  All variables contains in project.
+//	Define here the general values and others.
+//
+// ================================================================================================
+
+$body-bg: #f2f2f2;
+$base-font-size: 18px;
+
+$font-family: "Lato", Helvetica, sans-serif;
+$font-weight: 400;
+$font-style: normal;
+
+$global-radius: 5px;
+$global-rounded: 1000px;
+$global-margin: 30px;
+
+$base-shadow: $global-margin / 10;
+$base-factor: 10%;
+
+// ================================================================================================
+//  Base colors used in almost all components
+// ================================================================================================
+
+$color-hard: #546466;
+$color-medium-soft: lighten($color-hard, 25%);
+$color-soft: lighten($color-hard, 50%);
+
+$color-primary: #2C3E50;
+$color-secondary: #FD8679;
+$color-success: #00Bf9A;
+$color-error: #E65F78;
+$color-waiting: #E6CB61;
+
+$text-color: $color-hard;
+$input-color: $color-medium-soft;
+
+$link-color: $color-primary;
+$link-hover-color: lighten($color-primary, 10%);
+$link-active-color: darken($color-primary, 10%);
+
+$selection-background: $color-primary;
+$selection-color: white;
+
+// ================================================================================================
+//	Image sprites of the project
+// ================================================================================================
+
+// $general-sprite: sprite-map("general/*.png", $spacing: 10px, $repeat: no-repeat);
