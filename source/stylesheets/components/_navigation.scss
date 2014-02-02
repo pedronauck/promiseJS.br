@@ -7,8 +7,9 @@
 $navigation-bg: white;
 
 .navigation {
+	position: relative;
 	float: left;
-	width: 25%;
+	width: 300px;
 
 	ul {
 		@include list-nostyle;
@@ -26,6 +27,7 @@ $navigation-bg: white;
 	ul li a {
 		position: relative;
 		display: block;
+		color: $color-primary;
 		line-height: 2.5;
 		border-top: 1px solid darken($navigation-bg, 12%);
 		padding: 0 ($global-margin / 2);
@@ -49,4 +51,15 @@ $navigation-bg: white;
 			width: 10px;
 		}
 	}
+}
+
+.sticky {
+	position: fixed;
+	width: 300px;
+	top: 0;
+	float: none;
+}
+
+.sticky ~ .content {
+	float: none;
 }

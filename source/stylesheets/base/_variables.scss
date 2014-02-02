@@ -38,9 +38,9 @@ $color-waiting: #E6CB61;
 $text-color: $color-hard;
 $input-color: $color-medium-soft;
 
-$link-color: $color-primary;
-$link-hover-color: lighten($color-primary, 10%);
-$link-active-color: darken($color-primary, 10%);
+$link-color: $color-secondary;
+$link-hover-color: lighten($link-color, 10%);
+$link-active-color: darken($link-color, 10%);
 
 $selection-background: $color-primary;
 $selection-color: white;
