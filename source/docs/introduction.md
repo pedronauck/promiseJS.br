@@ -1,4 +1,4 @@
-# Introdução ao Promises
+## Introdução ao Promises
 
 Este guia assume que você tenha certa familiaridade com JavaScript básico e deve ser adequado tanto para pessoas novas em programação assíncrona quanto para aqueles que já tem alguma experiência.
 

@@ -1,0 +1,9 @@
+{
+  "name": "promiseJS-br",
+  "version": "0.0.0",
+  "description": "Tradução para Português do site promisejs.org",
+  "dependencies": {
+    "bower": "1.2.8"
+  },
+  "devDependencies": {}
+}

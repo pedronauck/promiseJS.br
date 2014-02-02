@@ -1,0 +1,52 @@
+// ================================================================================================
+//
+//  Components » Navigation
+//
+// ================================================================================================
+
+$navigation-bg: white;
+
+.navigation {
+	float: left;
+	width: 25%;
+
+	ul {
+		@include list-nostyle;
+		background: $navigation-bg;
+	}
+
+	ul .static {
+		font-size: flex(14px);
+		color: white;
+		padding: 0 ($global-margin / 2);
+		line-height: 2.5;
+		background: $color-primary;
+	}
+
+	ul li a {
+		position: relative;
+		display: block;
+		line-height: 2.5;
+		border-top: 1px solid darken($navigation-bg, 12%);
+		padding: 0 ($global-margin / 2);
+		@include transition(all .1s);
+
+		&:before {
+			@include pseudo-element;
+			width: 5px;
+			height: 100%;
+			background: darken($color-primary, 5%);
+			top: 0;
+			left: 0;
+			@include transition(all .1s);
+		}
+
+		&:hover {
+			padding-left: $global-margin / 1.5;
+		}
+
+		&:hover::before {
+			width: 10px;
+		}
+	}
+}

@@ -1,0 +1,49 @@
+// ================================================================================================
+//
+//	Partials » Main
+//
+// ================================================================================================
+
+.main {
+	@extend .column-row;
+	padding: $global-margin 0;
+}
+
+.content {
+	float: left;
+	width: 71%;
+	margin-left: 4%;
+
+	h2 {
+		color: $color-success;
+		margin-bottom: $global-margin;
+	}
+
+	h2 ~ h2 {
+		margin-top: $global-margin * 1.5;
+	}
+
+	h2:first-child {
+		margin-top: 0;
+	}
+}
+
+// ================================================================================================
+//	Masthead
+// ================================================================================================
+
+.masthead {
+	text-align: center;
+
+	h1 {
+		font-size: flex(120px);
+		font-weight: 100;
+		line-height: 1;
+		margin: $global-margin 0;
+	}
+
+	p {
+		width: 30%;
+		margin: $global-margin auto;
+	}
+}
