@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Implementações | PromiseJS.br</title>
+  <meta name="description" content="">
+  <link href="stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body class="">
+  <!--[if lt IE 9]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <header class="header">
+	<div class="header-container">
+		<div class="logo">
+			<a href="./">Promises</a>
+		</div>
+		<ul class="menu">
+			<li class="menu-item">
+				<a href="introducao.html">Introdução</a>
+			</li>
+			<li class="menu-item">
+				<a href="implementacoes.html">Implementações</a>
+			</li>
+		</ul>
+	</div>
+</header>
+
+  <main class="main"><aside class="navigation">
+	<ul>
+		<li class="static">Implementando Promises</li>
+		<li><a href="#promises">Promises</a></li>
+		<li><a href="#q">Q</a></li>
+		<li><a href="#when">When</a></li>
+		<li><a href="#rsvp.js">rsvp.js</a></li>
+		<li><a href="#vow">Vow</a></li>
+	</ul>
+</aside>
+
+<section class="content">
+<h2>Implementações</h2>
+
+<p>Essa página lista algumas das mais populares maneiras de implementar Promises. O Promise é meu, por isso vem em primeiro lugar. Q é meu favorito feito por outras pessoas, por isso vem em segundo lugar. I não tenho usado as outras implementações aqui, mas eles são relativamente populares.implementations here but they seem relatively popular.</p>
+
+<p>As Promises/A+ mantém uma lista completa de implementações <a href="https://github.com/promises-aplus/promises-spec/blob/master/implementations.md">aqui</a>, olhe caso você queira ter mais escolhas.</p>
+
+<h2><a name="promises"></a> Promise</h2>
+
+<p>Promise, por Forbes Lindesay, é uma simples e performática library para promise. Ela é desenhada para somente prover o esqueleto necessário para usar promises na sua selva.</p>
+
+<p>Se você usa node.js ou browserify, você pode insta-lo usando npm:</p>
+
+<pre><code class="language-javascript">npm install promise
+</code></pre>
+
+<p>e depois loadar usando require:</p>
+
+<pre><code class="language-javascript">var Promise = require(&#39;promise&#39;)
+</code></pre>
+
+<p>Se você está usando qualquer outro sistema de modulos ou quer loadar diretamente no browser, você pode baixar uma versão com uma definição de módulo standalone por <a href="http://www.promisejs.org/implementations/promise/promise-3.2.0.js">aqui</a> (com suporte <a href="https://github.com/ForbesLindesay/umd">UMD</a>) ou adicionar um tag <code>&lt;script&gt;</code> diretmente:</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;http://www.promisejs.org/implementations/promise/promise-3.2.0.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Uma vez instalado, você pode criar uma promise usando:</p>
+
+<pre><code class="language-javascript">var myPromise = new Promise(function (resolve, reject) {
+  // call resolve(value) to fulfill the promise with that value
+  // call reject(error) if something goes wrong
+})
+</code></pre>
+
+<p>A documentação completa pode ser encontrada em <a href="https://github.com/then/promise">https://github.com/then/promise</a>.</p>
+
+<h2><a name="q"></a> Q</h2>
+
+<p>Q, por Kris Kowal, é uma avançada e completa library para promise. Ela foi desenhada para ser completa e ter uma série de metódos auxiliares para fazer certas tarefas comuns serem fáceis. Ela é um pouco mais devagar que o Promise, mas pode compensar por ter melhor suporte para stacks trackes e features adicionais.</p>
+
+<p>Se você usa node.js ou browserify, você pode insta-lo usando npm:</p>
+
+<pre><code class="language-javascript">npm install q
+</code></pre>
+
+<p>e depois loadar usando require:</p>
+
+<pre><code class="language-javascript">var Q = require(&#39;q&#39;)
+</code></pre>
+
+<p>Se você está usando qualquer outro sistema de modulos ou quer loadar diretamente no browser, você pode baixar uma versão com uma definição de módulo standalone por <a href="http://www.promisejs.org/implementations/promise/promise-3.2.0.js">aqui</a> (com suporte <a href="https://github.com/ForbesLindesay/umd">UMD</a>) ou adicionar um tag <code>&lt;script&gt;</code> diretmente:</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;http://www.promisejs.org/implementations/q/q-0.9.6.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Uma vez instalado, você pode criar uma promise usando:</p>
+
+<pre><code class="language-javascript">var myPromise = Q.promise(function (resolve, reject) {
+  // call resolve(value) to fulfill the promise with that value
+  // call reject(error) if something goes wrong
+})
+</code></pre>
+
+<p>A documentação completa pode ser encontrada em <a href="https://github.com/kriskowal/q">https://github.com/kriskowal/q</a></p>
+
+<h2><a name="when"></a> When</h2>
+
+<p>Uma sólida, Promises/A+ rápida e implementação when(), mais outras boas coisas assíncronas.</p>
+
+<p>Se você usa node.js ou browserify, você pode insta-lo usando npm:</p>
+
+<pre><code class="language-javascript">npm install when
+</code></pre>
+
+<p>e depois loadar usando require:</p>
+
+<pre><code class="language-javascript">var when = require(&#39;when&#39;);
+</code></pre>
+
+<p>Se você está usando qualquer outro sistema de modulos ou quer loadar diretamente no browser, você pode baixar uma versão com uma definição de módulo standalone por <a href="http://www.promisejs.org/implementations/promise/promise-3.2.0.js">aqui</a> (com suporte <a href="https://github.com/ForbesLindesay/umd">UMD</a>) ou adicionar um tag <code>&lt;script&gt;</code> diretmente:</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;http://www.promisejs.org/implementations/when/when-2.2.1.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Uma vez instalado, você pode criar uma promise usando:</p>
+
+<pre><code class="language-javascript">var deferred = when.defer()
+var myPromise = deferred.promise
+// call deferred.resolve(value) to fulfill the promise with that value
+// call deferred.reject(error) if something goes wrong
+</code></pre>
+
+<p>A documentação completa pode ser encontrada em <a href="https://github.com/cujojs/when/wiki">https://github.com/cujojs/when/wiki</a>.</p>
+
+<h2><a name="rsvp.js"></a> rsvp.js</h2>
+
+<p>Uma implementação minúscula de Promises/A+ e um mixin para transformar objetos em event targets.</p>
+
+<p>Se você usa node.js ou browserify, você pode insta-lo usando npm:</p>
+
+<pre><code class="language-javascript">npm install rsvp
+</code></pre>
+
+<p>e depois loadar usando require:</p>
+
+<pre><code class="language-javascript">var RSVP = require(&#39;rsvp&#39;);
+</code></pre>
+
+<p>Se você está usando qualquer outro sistema de modulos ou quer loadar diretamente no browser, você pode baixar uma versão com uma definição de módulo standalone por <a href="http://www.promisejs.org/implementations/promise/promise-3.2.0.js">aqui</a> (com suporte <a href="https://github.com/ForbesLindesay/umd">UMD</a>) ou adicionar um tag <code>&lt;script&gt;</code> diretmente:</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;http://www.promisejs.org/implementations/rsvp/rsvp-2.0.1.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Uma vez instalado, você pode criar uma promise usando:</p>
+
+<pre><code class="language-javascript">var deferred = when.defer()
+var myPromise = deferred.promise
+// call deferred.resolve(value) to fulfill the promise with that value
+// call deferred.reject(error) if something goes wrong
+</code></pre>
+
+<p>A documentação completa pode ser encontrada em <a href="https://github.com/tildeio/rsvp.js">https://github.com/tildeio/rsvp.js</a>.</p>
+
+<h2><a name="vow"></a> Vow</h2>
+
+<p>Uma implementação de Promises/A+.</p>
+
+<p>Se você usa node.js ou browserify, você pode insta-lo usando npm:</p>
+
+<pre><code class="language-javascript">npm install vow
+</code></pre>
+
+<p>e depois loadar usando require:</p>
+
+<pre><code class="language-javascript">var Vow = require(&#39;vow&#39;);
+</code></pre>
+
+<p>Se você está usando qualquer outro sistema de modulos ou quer loadar diretamente no browser, você pode baixar uma versão com uma definição de módulo standalone por <a href="http://www.promisejs.org/implementations/promise/promise-3.2.0.js">aqui</a> (com suporte <a href="https://github.com/ForbesLindesay/umd">UMD</a>) ou adicionar um tag <code>&lt;script&gt;</code> diretmente:</p>
+
+<pre><code class="language-javascript">&lt;script src=&quot;http://www.promisejs.org/implementations/vow/vow-0.3.9.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Uma vez instalado, você pode criar uma promise usando:</p>
+
+<pre><code class="language-javascript">var myPromise = new RSVP.Promise(function (resolve, reject) {
+  // call resolve(value) to fulfill the promise with that value
+  // call reject(error) if something goes wrong
+})
+</code></pre>
+
+<p>A documentação completa pode ser encontrada em <a href="https://github.com/dfilatov/jspromise">https://github.com/dfilatov/jspromise</a>.</p>
+</section>
+</main>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="javascripts/app.js" type="text/javascript"></script>
+</body>
+</html>
