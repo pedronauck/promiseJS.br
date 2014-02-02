@@ -1,0 +1,17 @@
+{
+  "name": "package",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "feature-detects",
+    "media",
+    "test",
+    "lib"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0"
+  }
+}

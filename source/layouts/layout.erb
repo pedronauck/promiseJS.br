@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= current_page.data.title + " | WA Tecnologia" %></title>
+  <meta name="description" content="">
+  <%= stylesheet_link_tag "application", "vendor/prism" %>
+</head>
+<body class="<%= current_page.data.slug %>">
+  <!--[if lt IE 9]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <%= partial "shared/header" %>
+  <main class="main"><%= yield %></main>
+
+  <script src="javascripts/app.js"></script>
+</body>
+</html>
