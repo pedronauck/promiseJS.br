@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Introdução | Promise JS | WA Tecnologia</title>
+  <meta name="description" content="">
+  <link href="../stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body class="">
+  <!--[if lt IE 9]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <header class="header">
+	<div class="header-container">
+		<div class="logo">
+			<a href="/" title="Voltar para página inicial">Promises</a>
+		</div>
+		<ul class="menu">
+			<li class="menu-item">
+				<a href="/introducao">Introdução</a>
+			</li>
+			<li class="menu-item">
+				<a href="/implementacoes">Implementações</a>
+			</li>
+		</ul>
+	</div>
+</header>
+
+  <main class="main"><aside class="navigation">
+	<ul>
+		<li class="static">Introdução a Promises</li>
+		<li><a href="#">Motivação</a></li>
+		<li><a href="#">Uso Básico</a></li>
+		<li><a href="#">Transformação</a></li>
+		<li><a href="#">Combinação</a></li>
+		<li><a href="#">Implementação/Downloads</a></li>
+	</ul>
+</aside>
+
+<section class="content">
+<h2>Introdução ao Promises</h2>
+
+<p>Este guia assume que você tenha certa familiaridade com JavaScript básico e deve ser adequado tanto para pessoas novas em programação assíncrona quanto para aqueles que já tem alguma experiência.</p>
+
+<h2>Motivação</h2>
+
+<p>Nós queremos que nosso código seja assíncrono, porque se nós escrevemos códigos síncronos então a interface do usuário irá travar (nas aplicações no lado do cliente) ou as requisições não vão ser manipuladas (nas aplicações no lado do servidor). Uma forma de resolver este problema são as threads, mas elas criam seus próprios problemas e elas não são suportadas no JavaScript.</p>
+
+<p>Uma das formas mais simples de se fazer funções assíncronas é aceitando uma função callback. Isso é o que o Node.js faz (no momento em que escrevo). Isto funciona, mas tem um certo número de problemas.</p>
+
+<ol>
+<li><p>Você perde a separação de entradas e saídas da função, pois o callback deve ser passado como uma entrada.</p></li>
+<li><p>É difícil de compor múltiplas operações seriais ou paralelas.</p></li>
+<li><p>Você perde muitas informações úteis da depuração (debugg), e capacidade de manipulação de erros relativos ao rastreamento e execeções.</p></li>
+<li><p>Você não pode mais usar as construções do fluxo de controle embutidas, e todas elas devem ser reinventadas para trabalhar assíncronamente.</p></li>
+</ol>
+
+<p>Muitas APIs no navegador usam algum tipo de modelo de evento baseado no fluxo de controle, que resolve o problema 1, mas não os problemas 2 e 4.</p>
+
+<p>Promises tem por objetivo resolver o problema 1 e 3 e pode resolver o problema 4 no ES6 (com o uso de generators).</p>
+
+<h2>Uso Básico</h2>
+
+<p>A ideia central por trás das promises (promessas) é que uma promise representa um valor que é o resultado de uma operação assíncrona. Elas podem como alternativa vir a ser um erro lançado. Funções assíncronas podem retornar promises:</p>
+
+<pre>
+<code class="language-javascript">
+var prom = get('http://www.example.com');
+</code>
+</pre>
+
+<p>Se nós requisitarmos o conteúdo da página <code>www.example.com</code> nós vamos estar fazendo isso assíncronamente então podemos receber uma promise de volta.</p>
+
+<p>No intuito de extrair o valor desta promise, nós usamos <code class="language-javascript">.done</code> que enfilera uma função a ser executada quando a promise é preenchida com algum resultado.</p>
+
+<pre>
+<code class="language-javascript">
+var prom = get('http://www.example.com');
+prom.done(function ( content ) {
+    console.log( content );
+})
+</code>
+</pre>
+
+<p>Note como nós passamos uma função que ainda não foi chamada para <code class="language-javascript">.done</code> e isso vai ser chamado apenas uma vez, quando o promise estiver preenchido. Nós podemos chamar <code class="language-javascript">.done</code> quantas vezes quisermos, antes ou depois, como quisermos, e sempre iremos obter o mesmo resultado. Por exemplo, não há problema em chamá-lo depois que a promise já estiver resolvida:</p>
+
+<pre>
+<code class="language-javascript">
+var cache = {};
+
+function getCache ( url ) {
+    if ( cache[url] ) return cache[ url ];
+    else return cache[ url ] = get( url );
+}
+
+var promA = getCache( 'http://www.example.com' );
+
+promA.done(function ( content ) {
+    console.log( content );
+});
+
+setTimeout(function () {
+    var promB = getCache( 'http://www.example.com' );
+    promB.done(function ( content ) {
+        console.log( content );
+    });
+}, 10000);
+
+</code>
+</pre>
+
+<p>Claro, requisitar uma página de erro vai facilmente dar errado, e lançar um erro. Por padrão, <code class="language-javascript">.done</code> somente lança este erro, então isto fica registrado apropriadamente e (em ambientes diferentes do browser) quebra a aplicação. Nós frequentemente queremos atribuir nosso próprio manipulador:</p>
+
+<pre>
+<code class="language-javascript">
+var prom = get( 'http://www.example.com' );
+prom.done(function ( content ) {
+    console.log( content );
+}, function ( ex ) {
+    console.error( 'Requisição www.example.com falhou, você deveria tentar novamente?' );
+    console.error( ex.stack );
+});
+</code>
+</pre>
+
+<h2>Transformação</h2>
+
+<p>Sempre que você tiver uma promise para uma coisa e você precisa fazer algum trabalho nela para obter uma promise para outra coisa. Promises tem um método <code class="language-javascript">.then</code> que trabalha um pouco parecido com um <code class="language-javascript">.map</code> em um array.</p>
+
+<pre>
+<code class="language-javascript">
+function getJSON ( url ) {
+    return get ( url )
+        .then(function ( res ) {
+            return JSON.parse( res );
+        });
+}
+
+getJSON( 'htttp://www.example.com/foo.json' ).done(function ( res ) {
+    console.log( res );
+});
+</code>
+</pre>
+
+<p>Note como <code class="language-javascript">.then</code> manuseia qualquer erro para nós, então eles &ldquo;sobem&rdquo; nas pilhas como no código síncrono. VOcê pode também manipulá-los quando você chama <code class="language-javascript">.then</code></p>
+</section>
+</main>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="javascripts/app.js"></script>
+</body>
+</html>
