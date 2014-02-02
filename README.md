@@ -1,1 +1,1 @@
-# PromiseJS.br
+# PromisesJS.br
