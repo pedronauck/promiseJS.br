@@ -10,7 +10,7 @@ Uma das formas mais simples de se fazer funções assíncronas é aceitando uma 
 
 1. Você perde a separação de entradas e saídas da função, pois o callback deve ser passado como uma entrada.
 2. É difícil de compor múltiplas operações seriais ou paralelas.
-3. Você perde muitas informações úteis da depuração (debugg), e capacidade de manipulação de erros relativos ao rastreamento e execeções.
+3. Você perde muitas informações úteis da depuração (debugg), e capacidade de manipulação de erros relativos ao rastreamento e exceções.
 4. Você não pode mais usar as construções do fluxo de controle embutidas, e todas elas devem ser reinventadas para trabalhar assíncronamente.
 
 Muitas APIs no navegador usam algum tipo de modelo de evento baseado no fluxo de controle, que resolve o problema 1, mas não os problemas 2 e 4.
@@ -74,7 +74,7 @@ prom.done(function ( content ) {
 
 ## <a name="transformacao"></a> Transformação
 
-Sempre que você tiver uma promise para uma coisa e você precisa fazer algum trabalho nela para obter uma promise para outra coisa. Promises tem um método <code class="language-javascript">.then</code> que trabalha um pouco parecido com um <code class="language-javascript">.map</code> em um array.
+Sempre que você tiver uma promise para uma coisa, você precisa fazer algum trabalho nela para obter uma promise para outra coisa. Promises tem um método <code class="language-javascript">.then</code> que trabalha um pouco parecido com um <code class="language-javascript">.map</code> em um array.
 
 ```language-javascript
 function getJSON ( url ) {
@@ -89,7 +89,7 @@ getJSON( 'htttp://www.example.com/foo.json' ).done(function ( res ) {
 });
 ```
 
-Note como <code class="language-javascript">.then</code> manuseia qualquer erro para nós, então eles "sobem" nas pilhas como no código síncrono. VOcê pode também manipulá-los quando você chama <code class="language-javascript">.then</code>
+Note como <code class="language-javascript">.then</code> manuseia qualquer erro para nós, então eles "sobem" nas pilhas como no código síncrono. Você pode também manipulá-los quando você chama <code class="language-javascript">.then</code>
 
 ## <a name="combinacao"></a> Combinação
 
