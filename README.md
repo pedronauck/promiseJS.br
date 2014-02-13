@@ -2,7 +2,7 @@
 
 Tradução do site http://www.promisejs.org/
 
-### Veja [AQUI](http://eoop.github.io/promiseJS.br/) a tradução!
+### Veja [AQUI](http://cerebrobr.github.io/promiseJS.br) a tradução!
 
 ## Como contribuir?
 
