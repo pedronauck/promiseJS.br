@@ -5,5 +5,7 @@
   "dependencies": {
     "bower": "1.2.8"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    }
 }
